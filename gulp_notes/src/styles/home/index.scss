@@ -1,0 +1,10 @@
+$banner-height: 100px;
+
+.banner {
+    height: $banner-height;
+
+    .title {
+        font-size: 20px;
+        font-weight: 900;
+    }
+}

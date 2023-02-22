@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+<body>
+  <div class="alert_container">
+    <div class="alert">
+      <div class="text"></div>
+      <div class="btn_group">
+        <div class="btn determine">確定</div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .alert_container{
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      display: none;
+      justify-content: center;
+      align-items: flex-start;
+
+      z-index: 1000; 
+    }
+
+    .alert_container .alert{
+      width: 420px;
+      padding: 30px 15px 20px;
+
+      box-shadow: 2px 2px 6px rgba(20, 20, 20, 0.3);
+      background: white;
+
+      margin-top: 50px;
+      opacity: 0;
+      transition: 1s;
+    }
+    .alert_container .alert.show{
+      margin-top: 100px;
+      opacity: 1;
+    }
+
+    .alert_container .alert .text{
+      margin-bottom: 15px;
+    }
+    .alert_container .alert .btn_group{
+      display: flex;
+      justify-content: flex-end;
+    }
+    .alert_container .alert .btn_group .btn{
+      padding: 6px 15px;
+      border-radius: 5px;
+      background-color: rgb(31, 130, 255);
+      color:white;
+      cursor: pointer;
+    }
+  </style>
+  
+  <script>
+    function customized_alert(str, func){
+      let text = document.querySelector('.alert_container .text');
+      let alert_container = document.querySelector('.alert_container');
+      let alert = document.querySelector('.alert_container .alert');
+      let determine = document.querySelector('.alert_container .determine');
+
+      text.textContent = str;
+      alert_container.style.display = 'flex';
+      setTimeout(function(){
+        alert.classList.add('show');
+      },0)
+
+      function determine_handler(){
+        text.textContent = '';
+        alert_container.style.display = 'none';
+        alert.classList.remove('show');
+        determine.removeEventListener('click', determine_handler);
+        if(func){
+          func();
+        }
+      }
+      determine.addEventListener('click', determine_handler);
+    }
+
+    // customized_alert('閒置逾時，請重新登入', function(){
+    //   location.href = "/account/logout";
+    // })
+
+    customized_alert('閒置逾時，請重新登入');
+  </script>
+</body>
+</html>

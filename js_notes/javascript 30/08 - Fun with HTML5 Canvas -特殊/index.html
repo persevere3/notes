@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+  ;(function(){
+    let canvas = document.querySelector('#draw');
+
+    let x = 0, y = 0;
+    let direction = 1;
+    let isDrawing = false;
+    let isDown = false;
+
+    let ctx = canvas.getContext("2d");
+    let colorDeg = 0;
+    ctx.strokeStyle = `hsl(${colorDeg},100%,50%)`;
+    let width = 40;
+    ctx.lineWidth = width;
+    ctx.lineCap="round";
+    ctx.lineJoin="round";
+
+
+
+    canvas.addEventListener('mousedown',(e)=>{
+      isDown = true;
+      [x,y] = [e.offsetX, e.offsetY];
+    })
+    canvas.addEventListener('mousemove',(e)=>{
+      if(!isDrawing || !isDown) return;
+      
+      ctx.beginPath();
+      colorDeg = colorDeg < 360 ? colorDeg + 1 : colorDeg = 0;
+      ctx.strokeStyle = `hsl(${colorDeg},100%,50%)`;
+
+      ctx.lineWidth = width;
+
+      ctx.moveTo(x, y);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      [x,y] = [e.offsetX, e.offsetY];
+      ctx.stroke();
+
+      if(width === 20 ||  width === 40){
+        direction *= -1;
+      }
+      width += direction;
+    })
+    document.addEventListener('mouseup',()=>{
+      isDown = false;
+    })
+
+    canvas.addEventListener('mouseenter',(e)=>{
+      isDrawing = true;
+      [x,y] = [e.offsetX, e.offsetY];
+    })
+    canvas.addEventListener('mouseleave',()=>{
+      isDrawing = false;
+    })
+  })()
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+
+  canvas{
+    border: 1px solid;
+  }
+</style>
+
+</body>
+</html>

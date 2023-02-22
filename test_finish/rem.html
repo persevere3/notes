@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>convert</title>
+
+    <style>
+      #app{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+
+        font-size:30px;
+      }
+
+      .field{
+        padding: 20px;
+
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+
+        border-radius: 5px;
+        box-shadow: 0 0 1px 3px #ccc ;
+      }
+
+      input{
+        padding: 10px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        font-size: 30px;
+        outline: none;
+        border: 1px solid #ccc;
+      }
+      button{
+        width: 150px;
+        height: 50px;
+        margin-left: auto;
+        font-size: 30px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #aaa;
+        color: #fff;
+        cursor: pointer;
+      }
+      .field .input_container:last-child input{
+        margin-bottom: 0px;
+      }
+    </style>
+</head>
+<body>
+  <div id="app">
+
+    <div class="field"  @click="focus('.o_rem')">
+      <div class="input_container">
+        <input type="text"  v-model="rem_78" class="o_rem"> rem(78)
+      </div>
+  
+      <div class="input_container">
+        <input type="text"  v-model="px"> px
+      </div>
+  
+      <!-- <div class="input_container">
+        <input type="text"  v-model="rem_16" class="copy"> rem(16)
+      </div> -->
+
+      <!-- <button @click.stop="copy('.copy')"> copy </button> -->
+      
+      <div class="input_container">
+        <input type="text"  v-model="test" class="copy2">
+      </div>
+      <button @click.stop="copy('.copy2')"> copy2 </button>
+    </div>
+  </div> 
+    
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    rem_78: 0,
+    test: 'numberThousands()',
+  },
+  computed: {
+    px(){
+      return (parseFloat(this.rem_78) * 78);
+    },
+    rem_16(){
+      let rem = (parseFloat(this.rem_78) * 78 / 16).toFixed(6);
+      return rem;
+    }
+  },
+  methods: {
+    focus(selector){
+      let copy = document.querySelector(selector);
+      copy.select();
+    },
+    copy(selector){
+      let copy = document.querySelector(selector);
+      copy.select();
+      document.execCommand('copy');
+    }
+  }
+})
+</script>
+</body>
+</html>

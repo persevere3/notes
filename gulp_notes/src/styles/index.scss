@@ -1,0 +1,13 @@
+$header-height: 60px;
+$primary-color: #acacac;
+
+body {
+    background-color: $primary-color;
+    img {
+        width: 800px;
+    }
+
+    header {
+        height: $header-height;
+    }
+}

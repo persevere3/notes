@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 
+    // vue3 vite
+    npm init vite@latest
+    cd <>
+    npm install 
+    npm run dev 
+
+    // pinia
+    npm install pinia
+
+    // main.ts
+    import { createPinia } from 'pinia'
+
+    const pinia = createPinia()
+    const app = createApp(App)
+    app.use(pinia)
+    app.mount('#app')
+
+    // store/index.ts
+    import { defineStore} from 'pinia'
+
+    export const mainStore = defineStore('main',{
+      state:()=>{
+        return {
+          helloPinia:'Hello Pinia',
+          count: 0,
+          phone:'15139333888'
+        }
+      },
+      getters:{
+        phoneHidden(): string{
+          return this.phone.toString().replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
+        }
+      },
+      actions:{
+        changeState(){
+          this.count += 4
+          this.helloWorld += 4
+        }
+      }
+    })
+
+    // components/component.vue
+    <template>
+      <h2 >{{ helloWorld }}</h2>
+      <h2 >{{ count }}</h2>
+      <h2 class="">{{ phoneHidden }}</h2>
+      <button @click="handleClick">修改数据（简单方法）</button>
+      <button @click="handleClickPatch">修改数据（$patch）</button>
+      <button @click="handleClickPatchMethod">修改数据（$patch method）</button>
+      <button @click="handleClickActions">修改数据（actions）</button>
+    </template>
+
+    <script lang="ts" setup>
+    import { storeToRefs } from "pinia";
+    import { mainStore } from "../store/index";
+    
+    const store = mainStore();
+    const { helloPinia, count, changeState, phoneHidden} = storeToRefs(store);
+    
+    const handleClick = () => {
+      count++;
+      helloPinia += 2,
+    };
+
+    const handleClickPatch = () => {
+      store.$patch({
+        count: count + 2,
+        helloPinia: helloPinia + 2,
+      });
+    };
+
+    const handleClickMethod = () => {
+      store.$patch((state) => {
+        state.count += 3;
+        state.helloWorld += 3;
+      });
+    };
+
+    const handleClickActions = () => {
+      changeState()
+    }
+    </script>
+
+    <style lang="scss" scoped></style>
+
+
+    // store的互相调用
+    // store/component.ts
+    import { defineStore} from 'pinia'
+
+    export const newsStore = defineStore('news',{
+      state:()=>{
+        return {
+          list:['a','b','c']
+        }
+      }
+    })
+
+    // store/index.ts
+    import { defineStore } from 'pinia'
+    import { newsStore } from './newsStore'
+
+    export const mainStore = defineStore('main',{
+      state:()=>{
+        return {
+          helloPinia:'Hello Pinia',
+          count: 0,
+          phone:'15139333888'
+        }
+      },
+      getters:{
+        phoneHidden(): string{
+          return this.phone.toString().replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
+        }
+      },
+      actions:{
+        changeState(){
+          this.count += 4
+          this.helloWorld += 4
+        }
+        getList(){
+          console.log(newsStore().list)
+        }
+      }
+    })
+  -->
+</body>
+</html>

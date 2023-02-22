@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    // 01
+    // window.addEventListener('keydown',playHandler);
+    // function playHandler(e){
+    //   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    //   if(!audio) return;
+    //   audio.currentTime= 0;
+    //   audio.play();
+
+    //   const div = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    //   div.classList.add("playing");
+    // };
+    // document.querySelectorAll('.key').forEach(function(item){
+    //   item.addEventListener('transitionend',removePlaying);
+    // });
+    // function removePlaying(e){
+    //   if(e.propertyName==='transform'){
+    //     e.currentTarget.classList.remove("playing");
+    //   }
+    // };
+
+    // 02
+    // const secondHand = document.querySelector('.second-hand');
+    // const minHand = document.querySelector('.min-hand');
+    // const hourHand = document.querySelector('.hour-hand');
+
+    // function setTime() {
+    //   const now = new Date();
+
+    //   const secondDegree = now.getSeconds() * 6;
+    //   secondHand.style.transform = `rotate(${secondDegree}deg)`;
+
+    //   const minDegree = now.getMinutes() * 6 + now.getSeconds()/60*6;
+    //   minHand.style.transform = `rotate(${minDegree}deg)`;
+
+    //   const hourDegree = now.getHours() * 30 + now.getMinutes()/60*30;
+    //   hourHand.style.transform = `rotate(${hourDegree}deg)`;
+    // }
+
+    // function timeoutHandler(){
+    //   setTime();
+    //   setTimeout(timeoutHandler, 1000);
+    // }
+    // setTimeout(timeoutHandler, 1000);
+    // //  setInterval(setTime, 1000);
+
+    // 03
+    // let inputs = document.querySelectorAll('input');
+    // function handler(){
+    //   let unit = this.dataset.sizing || '';
+    //   document.documentElement.style.setProperty(`--${this.name}`,this.value + unit);
+    // }
+    // inputs.forEach(function(input){
+    //   input.addEventListener('change',handler);
+    //   input.addEventListener('mousemove',handler);
+    // })
+
+    // 04
+    // // Array.prototype.filter()
+    // // 1. Filter the list of inventors for those who were born in the 1500's
+    // const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+    // console.table(fifteen);
+
+    // // Array.prototype.map()
+    // // 2. Give us an array of the inventor first and last names
+    // const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    // console.log(fullNames);
+
+    // // Array.prototype.sort()
+    // // 3. Sort the inventors by birthdate, oldest to youngest
+    // const ordered = inventors.sort((a, b) => b.year - a.year );
+    // console.table(ordered);
+
+    // // Array.prototype.reduce()
+    // // 4. How many years did all the inventors live?
+    // const totalYears = inventors.reduce((total, inventor) => {
+    //   return total + (inventor.passed - inventor.year);
+    // }, 0);
+    // console.log(totalYears);
+
+    // // 5. Sort the inventors by years lived
+    // const oldest = inventors.sort(function(a, b) {
+    //   const lastInventor = a.passed - a.year;
+    //   const nextInventor = b.passed - b.year;
+    //   return lastInventor > nextInventor ? -1 : 1;
+    // });
+    // console.table(oldest);
+
+    // // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+    // // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // const links = Array.from(document.querySelectorAll('.mw-category a'));
+    // const de = links
+    //             .map(link => link.textContent)
+    //             .filter(streetName => streetName.includes('de'));
+
+    // // 7. sort Exercise
+    // // Sort the people alphabetically by last name
+    // const alpha = people.sort((lastOne, nextOne) => {
+    //   const [aLast, aFirst] = lastOne.split(', ');
+    //   const [bLast, bFirst] = nextOne.split(', ');
+    //   return aLast > bLast ? 1 : aLast < bLast ? -1 : 0;
+    // });
+    // console.log(alpha);
+
+    // // 8. Reduce Exercise
+    // // Sum up the instances of each of these
+    // const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
+    // const transportation = data.reduce(function(obj, item) {
+    //   if (!obj[item]) {
+    //     obj[item] = 0;
+    //   }
+    //   obj[item]++;
+    //   return obj;
+    // }, {});
+    // console.log(transportation);
+
+    // 05
+    // const panels = document.querySelectorAll('.panel');
+
+    // function toggleOpen() {
+    //   this.classList.toggle('open');
+    // }
+
+    // function toggleActive(e) {
+    //   console.log(e.propertyName);
+    //   if (e.propertyName.includes('flex')) {
+    //   // if ((e.propertyName.indexOf('flex')) !== -1) {
+    //     this.classList.toggle('open-active');
+    //   }
+    // }
+
+    // panels.forEach(panel => {
+    //   panel.addEventListener('click', toggleOpen);
+    //   panel.addEventListener('transitionend', toggleActive);
+    // })
+
+    // 06
+    // const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+    // // XMLHttpRequest
+    // // function requestHandler(){
+    // //   console.log(JSON.parse(this.response));
+    // // }
+    // // let xhr = new XMLHttpRequest();
+    // // xhr.withCredentials = true;
+    // // xhr.addEventListener('load',requestHandler);
+    // // xhr.open('get',endpoint);
+    // // xhr.send();
+    // // xhr.onreadystatechange = function() {
+    // //   if (this.readyState == 4 && this.status == 200) {
+    // //     console.log(JSON.parse(xhr.response));
+    // //   }
+    // // }
+
+    // // fetch
+    // const cities = [];
+    // fetch(endpoint)
+    //   .then(blob => blob.json())
+    //   .then(data => cities.push(...data));
+
+    // function findMatches(wordToMatch, cities) {
+    //   return cities.filter(place => {
+    //     // here we need to figure out if the city or state matches what was searched
+    //     const regex = new RegExp(wordToMatch, 'gi');
+    //     return place.city.match(regex) || place.state.match(regex)
+    //   });
+    // }
+
+    // function numberWithCommas(x) {
+    //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    //   // return x.toLocaleString();
+    // }
+
+    // function displayMatches() {
+    //   const matchArray = findMatches(this.value, cities);
+    //   const html = matchArray.map(place => {
+    //     const regex = new RegExp(this.value, 'gi');
+    //     const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    //     const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    //     return `
+    //       <li>
+    //         <span class="name">${cityName}, ${stateName}</span>
+    //         <span class="population">${numberWithCommas(place.population)}</span>
+    //       </li>
+    //     `;
+    //   }).join('');
+    //   suggestions.innerHTML = html;
+    // }
+
+    // const searchInput = document.querySelector('.search');
+    // const suggestions = document.querySelector('.suggestions');
+
+    // searchInput.addEventListener('change', displayMatches);
+    // searchInput.addEventListener('keyup', displayMatches);
+
+    // 07
+    // let ans = people.some(p=>{
+    //   return new Date().getFullYear() - p.year >= 19;
+    // })
+    // let ans2 = people.every(p=>{
+    //   return new Date().getFullYear() - p.year >= 19;
+    // })
+    // let ans3 = comments.find(comment => {
+    //   return comment.id === 823423;
+    // });
+    // let ans4 = comments.findIndex(comment => {
+    //   return comment.id === 823423;
+    // });
+    // const splice = comments.splice(ans4,1,123);
+    // const splice2 = [...comments].splice(ans4,1);
+    // const slice1 = comments.slice(0,ans4);
+    // const slice2 = comments.slice(ans4+1);
+    
+    // 08 - Fun with HTML5 Canvas
+
+    // 09 - Dev Tools Domination (console)
+
+    // 10
+    // const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'));
+    // let lastCheck = null;
+    // function clickHandler(e){
+    //   if(this.checked){
+    //     if(e.shiftKey && lastCheck !== null){
+    //       let nowCheck = checkboxes.indexOf(this);
+    //       checkboxes.slice(Math.min(nowCheck,lastCheck), Math.max(nowCheck,lastCheck))
+    //       .forEach( input => {
+    //         input.checked = true;
+    //       }) 
+    //     }
+    //     lastCheck = checkboxes.indexOf(this);
+    //   } else {
+    //     lastCheck = null;
+    //   }
+    // }
+    // checkboxes.forEach(input=>{
+    //   input.addEventListener('click',clickHandler);
+    // })
+
+    // 11 - Custom Video Player
+
+    // 12
+    // window.addEventListener('keyup',function(e){
+    //   input.push(e.keyCode);
+    //   input.splice(-secretCode.length - 1, input.length - secretCode.length);
+    //   // while(input.length > secretCode.length){
+    //   //   input.shift();
+    //   // }
+    //   if(input.join('') === secretCode.join('')){
+    //     console.log('ding');
+    //   }
+    // })
+
+    // 13
+    // function debounce(func, wait = 20, immediate = true) {
+    //   var timeout;
+    //   return function() {
+    //     var context = this, args = arguments;
+    //     var later = function() {
+    //       timeout = null;
+    //       if (!immediate) func.apply(context, args);
+    //     };
+    //     var callNow = immediate && !timeout;
+    //     clearTimeout(timeout);
+    //     timeout = setTimeout(later, wait);
+    //     if (callNow) func.apply(context, args);
+    //   };
+    // }
+    // function scrollHandler(){
+    //   let windowTop = window.scrollY;
+    //   let windowBottom = windowTop + window.innerHeight;
+    //   let imgs = document.querySelectorAll("img");
+
+    //   imgs.forEach(img => {
+    //     let imgMiddle = img.offsetTop + img.height/2;
+    //     if(imgMiddle < windowBottom && imgMiddle>windowTop){
+    //       img.classList.add('active');
+    //     } else{
+    //       img.classList.remove('active');
+    //     }
+    //   });
+    // }
+    // window.addEventListener('scroll', debounce(scrollHandler));
+
+    // 14
+    // let players2 = players.slice();
+    // players2 = [].concat(players);
+    // players2 = [...players];
+
+    // let person2 = Object.assign({}, person);
+    // // function不會複製
+    // let person3 = JSON.parse(JSON.stringify(person));
+
+    // 15
+    // const itemsList = document.querySelector('.plates');
+    // const addItemsButton = document.querySelector('.add-items');
+
+    // const items = JSON.parse(localStorage.getItem("items")) || [];
+
+    // createList(items,itemsList);
+    // function createList(data = [], dom) {
+    //   dom.innerHTML = data.map((item, i) => {
+    //     return `
+    //       <li>
+    //         <input type="checkbox" data-index=${i} id="item${i}" ${item.done ? 'checked' : ''} />
+    //         <label for="item${i}">${item.text}</label>
+    //       </li>
+    //     `;
+    //   }).join('');
+    // }
+
+    // addItemsButton.addEventListener('submit',addItem);
+    // function addItem(e){
+    //   e.preventDefault();
+    //   let input = this.querySelector("[name='item']");
+    //   items.push({ text:input.value, done:false }); // 更新 js
+    //   localStorage.setItem('items',JSON.stringify(items)); // 更新 ls
+    //   input.value='';
+
+    //   createList(items,itemsList); // 更新 畫面
+    // }
+
+    // itemsList.addEventListener('click',toggleDone);
+    // function toggleDone(e){
+    //   if (!e.target.matches('input')) return;
+    //   let index = e.target.dataset["index"];
+    //   items[index].done = !items[index].done; // 更新 js
+    //   localStorage.setItem('items',JSON.stringify(items)); // 更新 Ls
+
+    //   createList(items,itemsList); // 更新 畫面
+    // } 
+  
+  
+
+    // 16
+    // let length = 100;
+    // let text = document.querySelector('h1');
+    // document.querySelector('.container').addEventListener('mousemove',function(e){
+    //   let { offsetX:x, offsetY:y } = e;
+
+    //   if(e.target!==this){
+    //     x+=e.target.offsetLeft;
+    //     y+=e.target.offsetTop;
+    //   }
+
+    //   let lengthX =  Math.floor(x/this.offsetWidth*length) * 2 - length;
+    //   let lengthY =  Math.floor(y/this.offsetHeight*length) * 2 - length;
+
+    //   text.style.textShadow = `
+    //     ${lengthX*1}px ${lengthY*1}px 5px rgba(255,0,0,0.8),
+    //     ${lengthX*-1}px ${lengthY*-1}px 5px rgba(0,255,0,0.8)
+    //   `;
+    // })
+
+    // 17
+    // bands.sort((a,b) => strip(a) > strip(b) ? 1 : -1 );
+    // document.getElementById('bands').innerHTML= bands.map(band =>`<li> ${band} </li>`).join("");
+
+    // 18
+    // let li = document.querySelectorAll('li');
+    // let ms = [...li].map(item => item.dataset.time).map(time => {
+    //   let [min, sec] = time.split(":");
+    //   return min * 60 + (+sec);
+    // }).reduce((prev,next) => prev + next,0);
+
+    // let sec = ms % 60;
+    // let min = (ms - sec) / 60 % 60;
+    // let hour =(ms - sec - min * 60) / 60 / 60;
+
+    // hour = Math.floor(ms / 3600);
+    // min = Math.floor((ms % 3600) / 60);
+    // sec = ms % 60;
+
+    // 19 - Webcam Fun
+
+    // 20 - Speech Detection
+
+    // 21 - Geolocation
+
+    // 22  
+    // document.querySelectorAll("a").forEach(element => {
+    //   element.addEventListener('mouseenter',enterHandler);
+    // });
+    // let { top, left, width, height} = this.getBoundingClientRect();
+    // highlight.style.width = width + 'px';
+    // highlight.style.height = height + 'px';
+    // highlight.style.top = top + window.scrollY + 'px';
+    // highlight.style.left = left + window.scrollX + 'px';
+    // window.pageXOffset;
+
+    // 23 - Speech Synthesis
+
+    // 24
+    // if(window.scrollY >= nav.offsetTop){
+    //     document.body.classList.add('fixedMenu');
+    //     document.body.style.paddingTop = nav.offsetHeight + 'px';
+    //   } else {
+    //     document.body.classList.remove("fixedMenu");
+    //     document.body.style.paddingTop = "";
+    //   }
+    // window.addEventListener('scroll',scrollHandler);
+    // window.addEventListener('resize',resizeHandler);
+
+    // 25
+    // // 事件綁定
+    // let as = document.querySelectorAll("a");
+    // as.forEach(a => {
+    //   a.addEventListener("click", aHandler, {capture: false, once: false});
+    // });
+    // function aHandler(e){
+    //   // e.stopPropagation();
+    //   console.log('事件綁定',e.target);
+    // }
+    // // 事件委派
+    // let ul = document.querySelector("ul");
+    // ul.addEventListener("click", ulHandler, {capture: false, once: false});
+    // function ulHandler(e){
+    //   if(e.target.nodeName === 'A'){
+    //     console.log('事件委派',e.target);
+    //   }
+    // }
+    // // e.target e.currentTarget 
+    // // e.target.classList this.className
+    // // e.composePath().find(dom => {
+    // //   return dom.classList && dom.classList.contains("button");
+    // // })
+
+    // mouseenter, mouseleave currentTarget 事件綁定 
+    // mouseover, mouseout target 事件委派 ( jquery )
+
+    // 26
+    // const lis = document.querySelectorAll(".cool > li");
+    // const dropdownBackground = document.querySelector(".dropdownBackground");
+    // lis.forEach(li => {
+    //   li.addEventListener('mouseenter',enterHandler);
+    //   li.addEventListener('mouseleave',leaveHandler);
+    // })
+    // function enterHandler(){
+    //   this.classList.add("trigger-enter"); // dropdown => display:block; => getBoundingClientRect()
+    //   const dropdown = this.querySelector(".dropdown");
+    //   const rect = dropdown.getBoundingClientRect();
+    //   const navRect = document.querySelector('.top').getBoundingClientRect();
+    //   dropdownBackground.style.width = rect.width + 'px'; // 調整 dropdownBackground width,height,top,left
+    //   dropdownBackground.style.height = rect.height + 'px';
+    //   dropdownBackground.style.top = rect.top - navRect.top + 'px';
+    //   dropdownBackground.style.left = rect.left - navRect.left + 'px';
+    //   dropdownBackground.classList.add('open'); // dropdownBackground => opacity: 1;
+    //   setTimeout(()=>{
+    //     this.classList.contains("trigger-enter") && this.classList.add("trigger-enter-active");
+    //   },100);
+    // }
+    // function leaveHandler(){
+    //   this.classList.remove("trigger-enter");
+    //   this.classList.remove("trigger-enter-active");
+    //   dropdownBackground.classList.remove('open');
+    // }
+
+    // 27
+    // let list = document.querySelector(".items");
+    // let startX = 0;
+    // let startScroll = 0; // 2
+
+    // list.addEventListener('mousedown',startDrag); // touchstart
+    // list.addEventListener('mousemove',dragIng); // touchmove
+    // list.addEventListener('mouseup',stopDrag); // touchend
+    // list.addEventListener('mouseleave',stopDrag); 
+
+    // function startDrag (e){
+    //   list.classList.add('active');
+    //   startX = e.pageX;
+
+    //   startScroll = list.scrollLeft; // 2
+    // }
+    // function dragIng (e){
+    //   if(list.classList.contains("active")){
+    //     let move = e.pageX - startX;
+    //     // startX = e.pageX; 1
+    //     // list.scrollLeft -= move; 1
+
+    //     list.scrollLeft = startScroll - move; // 2
+    //   }
+    // }
+    // function stopDrag (e){
+    //   list.classList.remove('active');
+    // }
+
+    // 28
+    // const target = document.querySelector(".speed");
+    // const bar = document.querySelector(".speed-bar");
+    // const video = document.querySelector("video");
+
+    // target.addEventListener('mousemove',moveHandler);
+    // function moveHandler(e){
+    //   let y = e.pageY - this.offsetTop;
+    //   let percent = y / this.offsetHeight;
+    //   let height = Math.round(percent * 100) + "%";
+    //   bar.style.height = height;
+    //   percent = percent * 3.5 + 0.5;
+    //   bar.textContent = Math.round(percent * 100) / 100 + "x";
+    //   video.playbackRate = percent;
+    // }
+
+    // 29
+    // let timer;
+    // const buttons = document.querySelectorAll(".timer__controls > button");
+    // const timeLeft = document.querySelector(".display__time-left");
+    // const endTime = document.querySelector(".display__end-time");
+
+    // const startTimer = function(sec) {
+    //   const now = Date.now();
+    //   const end = now + sec * 1000;
+    //   // 倒數計時
+    //   setCountdown(end);
+    //   // 顯示最後時間
+    //   showEndTime(end);
+    // };
+
+    // function setCountdown(end) {
+    //   clearInterval(timer);
+    //   timer = setInterval(function() {
+    //     const secLeft = Math.floor((end - Date.now()) / 1000);
+    //     if (secLeft >= 0) {
+    //       const displayMin = Math.floor(secLeft / 60);
+    //       let displaySec = secLeft % 60;
+    //       displaySec = displaySec < 10 ? "0" + displaySec : displaySec;
+    //       timeLeft.innerText = `${displayMin}:${displaySec}`;
+    //     } else {
+    //       timeLeft.innerText = `Happy Coding !!!`;
+    //       clearInterval(timer);
+    //     }
+    //   }, 16);
+    // }
+
+    // function showEndTime(time) {
+    //   const endDate = new Date(time);
+    //   let hour = endDate.getHours();
+    //   let min = endDate.getMinutes();
+    //   min = min < 10 ? "0" + min : min;
+    //   endTime.innerText = `Back at ${hour}:${min}`;
+    // }
+
+    // const setTimer = function() {
+    //   const sec = parseInt(this.dataset.time);
+    //   startTimer(sec);
+    // };
+
+    // buttons.forEach(button => button.addEventListener("click", setTimer));
+    // document.querySelector("#custom").addEventListener("submit", function(e) {
+    //   e.preventDefault();
+    //   const value = parseInt(this.minutes.value);
+    //   if (value) {
+    //     startTimer(value * 60);
+    //     this.reset();
+    //   }
+    // });
+
+    // 30
+    // const scoreBoard = document.querySelector(".score");
+    // const moles = [...document.querySelectorAll(".mole")];
+    // const status = moles.reduce((prev, current, index) => {
+    //   prev[index] = false;
+    //   return prev;
+    // }, {});
+    // const clickHandler = function() {
+    //   if (molesProxy[moles.indexOf(this)]) {
+    //     setScore(score + 1);
+    //     molesProxy[moles.indexOf(this)] = false;
+    //   }
+    // };
+    // const molesProxy = new Proxy(status, {
+    //   get(target, key) {
+    //     return target[key];
+    //   },
+    //   set(target, key, value) {
+    //     target[key] = value;
+    //     moles[key].removeEventListener("click", clickHandler);
+    //     if (value) {
+    //       moles[key].addEventListener("click", clickHandler);
+    //       moles[key].classList.add("up");
+    //     } else {
+    //       moles[key].classList.remove("up");
+    //     }
+    //   }
+    // });
+    // let score = 0;
+    // let timeUp = true;
+    // const setScore = function(s) {
+    //   score = s;
+    //   scoreBoard.textContent = score;
+    // };
+    // const setMole = function(mole, time) {
+    //   molesProxy[mole] = true;
+    //   setTimeout(() => {
+    //     if (!timeUp) showRandomMole();
+    //   }, 500);
+    //   setTimeout(() => {
+    //     molesProxy[mole] = false;
+    //   }, time);
+    // };
+    // const showRandomMole = function() {
+    //   const mole = Math.floor(Math.random() * moles.length);
+    //   const time = Math.random() * (1500 - 1000) + 1000; // 1000~1500
+    //   if (molesProxy[mole]) return showRandomMole();
+    //   setMole(mole, time);
+    // };
+    // const startGame = function() {
+    //   if (!timeUp) return;
+    //   setScore(0);
+    //   timeUp = false;
+    //   showRandomMole();
+    //   setTimeout(() => {
+    //     (timeUp = true), alert("Time's Up");
+    //   }, 10000);
+    // };
+
+    // document.querySelector("button").addEventListener("click", startGame);
+    
+
+  </script>
+</body>
+</html>

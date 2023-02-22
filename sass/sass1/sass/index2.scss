@@ -1,0 +1,284 @@
+// sass -v
+// sass --watch sass:css --style expanded
+
+// 變量
+$primary-color: #1269b5;
+$primary-border: 1px solid $primary-color;
+ 
+.header{
+  border: $primary-border;
+}
+
+// 嵌套
+.nav{
+  height: 100px;
+
+  font: {
+    family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    size: 15px;
+    weight: normal;
+  }
+  border: 1px solid #000{
+    left: 0;
+    right: 0;
+  }
+
+  ul{
+    margin: 0;
+    li{
+      float: left;
+      list-style: none;
+      padding: 5px;
+      a{
+        display: block;
+        color: #000;
+        padding: 5px;
+        &:hover{
+          background-color: #0d2f7e;
+          color: #fff;
+        }
+      }
+    }
+  }
+  & &-text{
+    font-size: 15px;
+  }
+}
+
+// mixin include
+@mixin alert($background, $text-color){
+  background-color: $background;
+  color: $text-color;
+  a{
+    // darken
+    color: darken($text-color, 10%);
+  }
+}
+
+.alert-warning{
+  @include alert(#fcf8e3, #8a6d3b);
+}
+.alert-info{
+  @include alert( $text-color:#31708f, $background: #d9edf7);
+}
+
+// extend
+.alert{
+  padding: 15px;
+}
+.alert a{
+  font-weight: bold;
+}
+
+.alert-info{
+  @extend .alert;
+  border: $primary-border;
+}
+
+// import (partials => _開頭) 
+@import "page2";
+
+// comment
+/* 多行註釋會  在編譯後輸出的Css中保留 */
+// 單行註釋不會在編譯後輸出的Css中保留
+
+// data type // sass-i 
+// number
+// type-of(5) // number 
+// type-of(5px) // number
+// 8*2 // 16
+// (8/2) // 除法要加括號 
+// 5px - 2 // 3px
+// 5px * 2px // 10px*px
+// 5px * 2 // 10px
+// (10px / 2px) // 5
+// (10px / 2) // 5px
+// 數字函數
+// abs(10) // 10
+// abs(10px) // 10px
+// abs(-10px) // 10px
+// round(3.5) // 4
+// round(3.2) // 3
+// ceil(3.5) // 4
+// ceil(3.2) // 4
+// floor(3.5) // 3
+// floor(3.2) // 3
+// percentage(650px/1000px) // 65%
+// min(1, 2, 3) // 1
+// max(1, 2, 3) // 3
+
+// string
+// type-of(hello) // string 
+// type-of("hello") // string
+// "ning" + hao // "ninghao"
+// ning - hao // "ning-hao"
+// ning / hao // "ning/hao"
+// ning * hao // error 
+// 字串函數
+// $greeting: "Ninghao"
+// to-upper-case($greeting) // "NINGHAO"
+// to-lower-case($greeting) // "ninghao"
+// str-length($greeting) // 7
+// str-index($greeting, "Ning") // 1
+// str-insert($greeting, ".net", 8) // "Ninghao.net"
+
+// interpolation
+// $version: "0.0.1";
+// /* 項目當前版本: #{$version} */
+// $name: "info";
+// $attr: "border";
+
+// .prompt-#{$name}{
+//   #{$attr}-color: #ccc;
+// }
+
+// boolean
+// 5px > 3px // true
+// not(5px > 3px) // false
+// (5px > 3px) and (5px > 10px) // false
+// (5px > 3px) or (5px > 10px) // true
+
+// list
+// type-of(1px solid #000) // list 
+// type-of(5px 10px) // list
+// 列表函數
+// length(5px 10px) // 2
+// nth(5px 10px, 2) // 10px
+// index(1px solid #000, solid) // 2
+// append(5px 10px, 5px) // 5px 10px 5px
+// join(5px 10px, 5px 0) // 5px 10px 5px 0
+// join(5px 10px, 5px 0, comma) // 5px, 10px, 5px, 0
+// map
+// $colors(light: #ffffff, dark: #000000)
+// lengh($colors) // 2
+// map-get($colors, dark) // #000000
+// map-keys($colors) // ("light", "dark")
+// map-values($colors) // ("#ffffff", "#000000")
+// map-has-keys($colors, light) // true
+// map-merge($colors, (light-gray: #e5e5e5)) // (light: #ffffff, dark: #000000, light-gray: #e5e5e5)
+// map-remove($colors, light, dark)) // (light-gray: #e5e5e5)
+
+// color
+// type-of(red) // color 
+// type-of(#ff0000) // color 
+// type-of(rgb(255, 0, 0)) // color
+
+// adjust-hue
+// $base-color-hsl: hsl(0, 100, 50%);
+// .alert{
+//   background-color: adjust-hue($base-color-hsl, 137deg);
+// }
+
+// lighten，darken
+// $base-color: hsl(222, 100%, 50%);
+// $light-color: lighten($base-color, 30%);
+// $dark-color: darken($base-color, 20%);
+// .alert{
+//   border: 1px solid $base-color;
+//   background-color: $light-color;
+//   color: $dark-color;
+// } 
+
+// saturate，desaturate
+// $base-color: hsl(221, 50%, 50%);
+// $saturate-color: saturate($base-color, 50%);
+// $desaturate-color: desaturate($base-color, 30%);
+// .alert{
+//   border: 1px solid $base-color;
+//   background-color: $saturate-color;
+//   color: $desaturate-color;
+// } 
+
+// saturate，desaturate
+$base-color: hsla(221, 50%, 50%, 0.5);
+$fade-in-color: opacify($base-color, 0.3);
+$fade-out-color: transparentize($base-color, 0.2);
+.alert{
+  border: 1px solid $base-color;
+  background-color: $fade-in-color;
+  color: $fade-out-color;
+}
+
+// @if
+$use-prefixes: true;
+@mixin prefixes($attr, $value){
+  -webkit-#{$attr}: $value;
+  -moz-#{$attr}: $value;
+  -ms-#{$attr}: $value;
+  -o-#{$attr}: $value;
+}
+.rounded{
+  border-radius: 5px;
+  @if $use-prefixes {
+    @include prefixes(border-radius, 5px);
+  }
+}
+
+$theme: other;
+body {
+  @if $theme == dark{
+    background-color: black;
+  }
+  @else if $theme == light{
+    background-color: white;
+  }
+  @else {
+    background-color: gray;
+  }
+}
+
+// @for
+$columns: 4;
+@for $i from 1 to $columns{
+  .col-#{$i}{
+    width: 100% / $columns * $i;
+  }
+}
+@for $i from 1 through $columns{
+  .col-#{$i}{
+    width: 100% / $columns * $i;
+  }
+}
+
+// @each
+$icons: success error warning;
+@each $icon in $icons{
+  .icon-#{$icon}{
+    background-image: url(../img/icons/#{icon}.png);
+  }
+}
+
+// @while
+$i: 6;
+@while $i > 0 {
+  .item-#{$i}{
+    width: 5px * $i;
+  }
+  $i: $i - 2;
+}
+
+// function
+// $colors: (light: #ffffff, dark: #000000);
+// @function color($key){
+
+//   // 警告與錯誤
+//   @if not map-has-key($colors, $key){
+//     @error "在 $colors 裡沒找到 #{$key} 這個key"
+//   }
+
+//   @return map-get($colors, $key);
+// }
+
+// body{
+//   background-color: color(gray);
+// }
+
+
+
+
+
+
+
+
+
+

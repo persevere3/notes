@@ -1,0 +1,13 @@
+# GET http://localhost:3000/api/test/getTest
+
+# GET http://localhost:3000/api/test/getTestByID
+# ?id=0
+
+# GET http://localhost:3000/api/test/getTestByID/0/abc
+
+# POST http://localhost:3000/api/test/add
+# Content-Type: application/json
+
+# {
+#   "name": "aaa"
+# }

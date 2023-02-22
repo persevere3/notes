@@ -1,0 +1,48 @@
+// ts編譯器的配置文件
+{
+  // 用來指定哪些ts文件需要被編譯
+  // **表任意目錄
+  // * 表任意文件
+  "include": [
+    "./src/ts/*"
+  ],
+
+  // 編譯器選項
+  "compilerOptions": {
+    // 指定ts被編譯的ES版本
+    "target": "ES6",
+    // 指定要使用的模塊化的規範
+    "module": "ES6", // ES6 commonjs system amd
+    // 指定要使用的庫
+    "lib": ["ES6", "dom"],
+
+    // 指定編譯後文件所在目錄
+    "outDir": "./dist/js",
+    // 將代碼合併為一個文件
+    // "outFile": "./dist/app.js",
+
+    // 是否對js文件進行編譯，默認false
+    "allowJs": false,
+    // 是否檢查js代碼符合語法規範，默認false
+    "checkJs": false,
+
+    // 是否移除註釋，默認false
+    "removeComments": true,
+
+    // 不生成編譯後文件，默認false
+    // "noEmit": false,
+    // 當有錯誤時不生成編譯後文件，默認false
+    "noEmitOnError": true,
+
+    // 所有嚴格檢查總開關
+    "strict": true,
+    // 設置編譯後文件是否使用嚴格模式，默認false
+    "alwaysStrict": true,
+    // 不允許隱式any
+    "noImplicitAny": true,
+    // 不允許不明確類型的this
+    "noImplicitThis": true,
+    // 嚴格檢查空值，默認false
+    "strictNullChecks": true,
+  }
+}

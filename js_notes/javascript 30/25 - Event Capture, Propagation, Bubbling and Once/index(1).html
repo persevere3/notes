@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+    
+    *, *:before, *:after { 
+      box-sizing: inherit; 
+    }
+
+    div {
+      width: 100%;
+      padding: 100px;
+    }
+
+    .one {
+      background: thistle;
+    }
+
+    .two {
+      background: mistyrose;
+    }
+
+    .three {
+      background: coral;
+    }
+  </style>
+</head>
+<body class="bod">
+
+  <button>Button</button>
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+  <ul>
+    <li><a href="javascript:;">Button1</a></li>
+    <li><a href="javascript:;">Button2</a></li>
+    <li><a href="javascript:;">Button3</a></li>
+  </ul>
+
+  <script>
+    let button = document.querySelector("button");
+    button.addEventListener("click", buttonHandler, {capture: true, once: false});
+    function buttonHandler(){
+      console.log("Button Click");
+    }
+
+    let divs = document.querySelectorAll("div");
+    divs.forEach(div => {
+      div.addEventListener("click", divHandler, {capture: false, once: false});
+    });
+    function divHandler(e){
+      e.stopPropagation();
+      console.log(this.className, e.target.classList[0]);
+    }
+
+    // 事件綁定
+    let as = document.querySelectorAll("a");
+    as.forEach(a => {
+      a.addEventListener("click", aHandler, {capture: false, once: false});
+    });
+    function aHandler(e){
+      // e.stopPropagation();
+      console.log('事件綁定',e.target);
+    }
+    // 事件委派
+    let ul = document.querySelector("ul");
+    ul.addEventListener("click", ulHandler, {capture: false, once: false});
+    function ulHandler(e){
+      if(e.target.nodeName === 'A'){
+        console.log('事件委派',e.target);
+      }
+    }
+    // e.target e.currentTarget 
+    // e.target.classList this.className
+    // e.composePath().find(dom => {
+    //   return dom.classList && dom.classList.contains("button");
+    // })
+
+
+
+  </script>
+</body>
+</html>

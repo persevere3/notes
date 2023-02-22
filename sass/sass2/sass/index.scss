@@ -1,0 +1,350 @@
+// // comment
+/* 多行註釋會  在編譯後輸出的Css中保留 */
+// 單行註釋不會在編譯後輸出的Css中保留
+
+// // sass -v
+// // sass --watch sass:css --style expanded
+
+// // import (partials => _開頭) 
+// @import "page";
+
+// // 變量
+// $primary-color: #1269b5;
+// $primary-border: 1px solid $primary-color;
+ 
+// .header{
+//   border: $primary-border;
+// }
+
+// // interpolation #{}
+// $root: 'img/';
+// .pic{
+// 	background: url(#{$root}pic.jpg);
+// }
+
+// $icon-style:blue;
+// .icon-#{$icon-style}{
+//   color: $icon-style;
+// }
+
+// // width height
+// .img{
+//   width: image-width("logo.png")
+// }
+
+// // lighten，darken
+// $base-color: hsl(222, 100%, 50%);
+// $light-color: lighten($base-color, 30%);
+// $dark-color: darken($base-color, 20%);
+// .alert{
+//   border: 1px solid $base-color;
+//   background-color: $light-color;
+//   color: $dark-color;
+// } 
+
+// // 嵌套
+.nav{
+  height: 100px;
+
+  font: {
+    family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    size: 15px;
+    weight: normal;
+  }
+  border: 1px solid #000{
+    left: 0;
+    right: 0;
+  }
+
+  ul{
+    margin: 0;
+    li{
+      float: left;
+      list-style: none;
+      padding: 5px;
+      a{
+        display: block;
+        color: #000;
+        padding: 5px;
+        &:hover{
+          background-color: #0d2f7e;
+          color: #fff;
+        }
+      }
+    }
+  }
+  & &-text{
+    font-size: 15px;
+  }
+}
+
+// // mixin include
+// @mixin alert($background, $text-color){
+//   background-color: $background;
+//   color: $text-color;
+//   a{
+//     // darken
+//     color: darken($text-color, 10%);
+//   }
+// }
+
+// .alert-warning{
+//   @include alert(#fcf8e3, #8a6d3b);
+// }
+// .alert-info{
+//   @include alert( $text-color:#31708f, $background: #d9edf7);
+// }
+
+// // extend
+// .alert{
+//   padding: 15px;
+// }
+// .alert a{
+//   font-weight: bold;
+// }
+
+// .alert-info{
+//   @extend .alert;
+//   border: $primary-border;
+// }
+
+// // @if
+// $use-prefixes: true;
+// @mixin prefixes($attr, $value){
+//   -webkit-#{$attr}: $value;
+//   -moz-#{$attr}: $value;
+//   -ms-#{$attr}: $value;
+//   -o-#{$attr}: $value;
+// }
+// .rounded{
+//   border-radius: 5px;
+//   @if $use-prefixes {
+//     @include prefixes(border-radius, 5px);
+//   }
+// }
+
+// $theme: other;
+// body {
+//   @if $theme == dark{
+//     background-color: black;
+//   }
+//   @else if $theme == light{
+//     background-color: white;
+//   }
+//   @else {
+//     background-color: gray;
+//   }
+// }
+
+// // @if @else
+// 預設是等腰三角形，如要做正三角形，請將type預設變數改為0.8666666 
+// @mixin triangle ($size, $color, $align, $type:1){
+//   height: 0;
+//   width: 0;
+//   @if $align == top{
+//     border-bottom: ($size*$type) solid $color;
+//     border-left: ($size/2) solid transparent;
+//     border-right: ($size/2) solid transparent;
+//   }
+//   @else if $align == right{
+//     border-left: ($size*$type) solid $color;
+//     border-top: ($size/2) solid transparent;
+//     border-bottom: ($size/2) solid transparent;
+//   }
+//   @else if $align == bottom{
+//     border-top: ($size*$type) solid $color;
+//     border-left: ($size/2) solid transparent;
+//     border-right: ($size/2) solid transparent;
+//   }
+//   @else if $align == left{
+//     border-right: ($size*$type) solid $color;
+//     border-top: ($size/2) solid transparent;
+//     border-bottom: ($size/2) solid transparent;
+//   } 
+//   @else if $align == right-top{
+//     border-right: $size solid $color;
+//     border-bottom: $size solid transparent;
+//   }
+//   @else if $align == left-top{
+//     border-left: $size solid $color;
+//     border-bottom: $size solid transparent;
+//   }
+//   @else if $align == right-bottom{
+//     border-right: $size solid $color;
+//     border-top: $size solid transparent;
+//   }
+//   @else if $align == left-bottom{
+//     border-left: $size solid $color;
+//     border-top: $size solid transparent;
+//   }
+// }
+// .box{
+//   @include triangle(30px, red, right);
+// }
+
+// // @for $i from 1 to(through) length($變數)
+// $box-bgColor: red, orange, yellow, green, blue;
+// @for $i from 1 through length($box-bgColor){
+//   .#{nth($box-bgColor, $i)}{
+//     color: nth($box-bgColor, $i);
+//     background: invert(nth($box-bgColor, $i));
+//   }
+// }
+
+// // @each
+// $icons: success error warning;
+// @each $icon in $icons{
+//   .icon-#{$icon}{
+//     background-image: url(../img/icons/#{icon}.png);
+//   }
+// }
+
+// // random(x) : 1~x 
+// $boxesLength: 3;
+// @for $i from 1 through $boxesLength{
+//   .for-#{$i}{
+//     height: 50px;
+//     width: 50px;
+//     position: absolute;
+
+//     left: random(1000) - 100 + px;
+//     bottom: random(1000) - 100 + px;
+
+//     background: rgb(random(255),random(255),random(255));
+//     transition: all 3s cubic-bezier(#{random(1000)/1000}, #{random(1000)/1000}, #{random(1000)/1000}, #{random(1000)/1000});
+//   }
+// }
+
+// // index(陣列, 值) return 索引 
+// // nth(陣列, 索引[1...]) return 值
+// $sites:      coffee  cart   cloth;
+// $bg-color:   #fff    #000   gray;
+// $text-color: red     orange yellow;
+
+// $style: index($sites, cloth); // 3
+
+// .box{
+//   background: nth($bg-color, $style); // 3 gray
+//   color: nth($text-color, 1); // 1 red
+// }
+
+// // 動畫
+// // transition: all 1s linear
+// // linear：均速
+// // ease：快到慢
+// // ease-in：漸快
+// // ease-out：漸慢
+// // ease-in-out：快→慢→快
+// .box{
+//   transition: all 1s cubic-bezier(0.250, 0.250, 0.750, 0.750);
+// }
+
+// // function
+// $colors: (light: #ffffff, dark: #000000);
+// @function color($key){
+//   // 警告與錯誤
+//   @if not map-has-key($colors, $key){
+//     @error "在 $colors 裡沒找到 #{$key} 這個key"
+//   }
+//   @return map-get($colors, $key);
+// }
+
+// body{
+//   background-color: color(gray);
+// }
+
+
+// // data type
+// // number
+// type-of(5px) // number
+// 5px - 2 // 3px
+// 5px * 2px // 10px*px
+// 5px * 2 // 10px
+// (10px / 2px) // 5, 除法要加括號 
+// (10px / 2) // 5px, 除法要加括號 
+// // 數字函數
+// abs(-10px) // 10px
+// round(3.5) // 4
+// round(3.2) // 3
+// ceil(3.2) // 4
+// floor(3.5) // 3
+// percentage(650px/1000px) // 65%
+// min(1, 2, 3) // 1
+// max(1, 2, 3) // 3
+
+// // string
+// type-of(hello) // string 
+// type-of("hello") // string
+// "ning" + hao // "ninghao"
+// ning - hao // "ning-hao"
+// ning / hao // "ning/hao"
+// ning * hao // error 
+// // 字串函數
+// $greeting: "Ninghao"
+// to-upper-case($greeting) // "NINGHAO"
+// to-lower-case($greeting) // "ninghao"
+// str-length($greeting) // 7
+// str-index($greeting, "Ning") // 1
+// str-insert($greeting, ".net", 8) // "Ninghao.net"
+
+// // boolean
+// not(5px > 3px) // false
+// (5px > 3px) and (5px > 10px) // false
+// (5px > 3px) or (5px > 10px) // true
+
+// // list
+// type-of(1px solid #000) // list 
+// type-of(5px 10px) // list
+// 列表函數
+// length(5px 10px) // 2
+// nth(5px 10px, 2) // 10px
+// index(1px solid #000, solid) // 2
+// append(5px 10px, 5px) // 5px 10px 5px
+// join(5px 10px, 5px 0) // 5px 10px 5px 0
+
+// // map
+// $colors(light: #ffffff, dark: #000000)
+// lengh($colors) // 2
+// map-get($colors, dark) // #000000
+// map-keys($colors) // ("light", "dark")
+// map-values($colors) // ("#ffffff", "#000000")
+// map-has-keys($colors, light) // true
+// map-merge($colors, (light-gray: #e5e5e5)) // (light: #ffffff, dark: #000000, light-gray: #e5e5e5)
+// map-remove($colors, light, dark)) // (light-gray: #e5e5e5)
+
+// adjust-hue
+// $base-color-hsl: hsl(0, 100, 50%);
+// .alert{
+//   background-color: adjust-hue($base-color-hsl, 137deg);
+// }
+
+// saturate，desaturate
+// $base-color: hsl(221, 50%, 50%);
+// $saturate-color: saturate($base-color, 50%);
+// $desaturate-color: desaturate($base-color, 30%);
+// .alert{
+//   border: 1px solid $base-color;
+//   background-color: $saturate-color;
+//   color: $desaturate-color;
+// } 
+
+a{
+  color: lighten(#43425c, 10%);
+}
+small{
+  color: darken(#43425c, 10%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

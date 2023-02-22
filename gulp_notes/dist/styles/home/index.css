@@ -1,0 +1,7 @@
+.banner {
+  height: 100px;
+}
+.banner .title {
+  font-size: 20px;
+  font-weight: 900;
+}
